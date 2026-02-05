@@ -1,0 +1,104 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Product Dashboard</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+</head>
+<body>
+    <div class="container mt-5">
+        <h1>Product Dashboard</h1>
+        <input type="text" id="searchInput" class="form-control mb-3" placeholder="Search by title">
+        <select id="itemsPerPage" class="form-select mb-3">
+            <option value="5">5 per page</option>
+            <option value="10" selected>10 per page</option>
+            <option value="20">20 per page</option>
+        </select>
+        <table class="table table-striped">
+            <thead>
+                <tr>
+                    <th>ID</th>
+                    <th>Title <button class="btn btn-sm btn-outline-secondary" onclick="sortBy('title')">Sort</button></th>
+                    <th>Price <button class="btn btn-sm btn-outline-secondary" onclick="sortBy('price')">Sort</button></th>
+                    <th>Category</th>
+                    <th>Images</th>
+                </tr>
+            </thead>
+            <tbody id="productTableBody"></tbody>
+        </table>
+        <ul class="pagination" id="pagination"></ul>
+        <button class="btn btn-primary" onclick="exportToCSV()">Export CSV</button>
+        <button class="btn btn-success" data-bs-toggle="modal" data-bs-target="#createModal">Create Product</button>
+    </div>
+
+    <!-- Detail Modal -->
+    <div class="modal fade" id="detailModal" tabindex="-1">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="detailModalLabel">Detail</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
+                </div>
+                <div class="modal-body" id="detailModalBody"></div>
+                <div class="modal-footer">
+                    <button class="btn btn-primary" onclick="editProduct()">Edit</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Edit Modal -->
+    <div class="modal fade" id="editModal" tabindex="-1">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title">Edit Product</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
+                </div>
+                <div class="modal-body">
+                    <form id="editForm">
+                        <input type="text" id="editTitle" class="form-control mb-2" placeholder="Title">
+                        <input type="number" id="editPrice" class="form-control mb-2" placeholder="Price">
+                        <textarea id="editDescription" class="form-control mb-2" placeholder="Description"></textarea>
+                        <input type="number" id="editCategoryId" class="form-control mb-2" placeholder="Category ID">
+                        <input type="text" id="editImages" class="form-control mb-2" placeholder="Images (URLs separated by comma)" required>
+                        <button type="submit" class="btn btn-success">Update</button>
+                    </form>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Create Modal -->
+    <div class="modal fade" id="createModal" tabindex="-1">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title">Create Product</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
+                </div>
+                <div class="modal-body">
+                    <form id="createForm">
+                        <input type="text" id="createTitle" class="form-control mb-2" placeholder="Title" required>
+                        <input type="number" id="createPrice" class="form-control mb-2" placeholder="Price" required>
+                        <textarea id="createDescription" class="form-control mb-2" placeholder="Description" required></textarea>
+                        <input type="number" id="createCategoryId" class="form-control mb-2" placeholder="Category ID" required>
+                        <input type="text" id="createImages" class="form-control mb-2" placeholder="Images (URLs separated by comma)" required>
+                        <button type="submit" class="btn btn-success">Create</button>
+                    </form>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="script.js"></script>
+</body>
+</html>
