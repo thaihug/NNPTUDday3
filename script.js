@@ -5,6 +5,41 @@ let currentPage = 1;
 let itemsPerPage = 10;
 let sortColumn = null;
 let sortOrder = 'asc';
+let categories = [];
+
+// Fetch categories
+async function fetchCategories() {
+    try {
+        const response = await fetch('https://api.escuelajs.co/api/v1/categories');
+        if (!response.ok) {
+            throw new Error('HTTP ' + response.status);
+        }
+        categories = await response.json();
+        populateCategorySelects();
+    } catch (error) {
+        console.error('Error fetching categories:', error);
+        categories = [{ id: 1, name: 'Sample Category' }];
+        populateCategorySelects();
+    }
+}
+
+// Populate category selects
+function populateCategorySelects() {
+    const createSelect = document.getElementById('createCategoryId');
+    const editSelect = document.getElementById('editCategoryId');
+    createSelect.innerHTML = '<option value="">Select Category</option>';
+    editSelect.innerHTML = '<option value="">Select Category</option>';
+    categories.forEach(cat => {
+        const option1 = document.createElement('option');
+        option1.value = cat.id;
+        option1.textContent = cat.name;
+        createSelect.appendChild(option1);
+        const option2 = document.createElement('option');
+        option2.value = cat.id;
+        option2.textContent = cat.name;
+        editSelect.appendChild(option2);
+    });
+}
 
 // Fetch products
 async function fetchProducts() {
@@ -268,6 +303,7 @@ function init() {
             }
         });
 
+        fetchCategories();
         fetchProducts();
         console.log('Init end');
     } catch (error) {

@@ -61,7 +61,9 @@
                         <input type="text" id="editTitle" class="form-control mb-2" placeholder="Title">
                         <input type="number" id="editPrice" class="form-control mb-2" placeholder="Price">
                         <textarea id="editDescription" class="form-control mb-2" placeholder="Description"></textarea>
-                        <input type="number" id="editCategoryId" class="form-control mb-2" placeholder="Category ID">
+                        <select id="editCategoryId" class="form-control mb-2" required>
+                            <option value="">Select Category</option>
+                        </select>
                         <input type="text" id="editImages" class="form-control mb-2" placeholder="Images (URLs separated by comma)" required>
                         <button type="submit" class="btn btn-success">Update</button>
                     </form>
@@ -86,7 +88,9 @@
                         <input type="text" id="createTitle" class="form-control mb-2" placeholder="Title" required>
                         <input type="number" id="createPrice" class="form-control mb-2" placeholder="Price" required>
                         <textarea id="createDescription" class="form-control mb-2" placeholder="Description" required></textarea>
-                        <input type="number" id="createCategoryId" class="form-control mb-2" placeholder="Category ID" required>
+                        <select id="createCategoryId" class="form-control mb-2" required>
+                            <option value="">Select Category</option>
+                        </select>
                         <input type="text" id="createImages" class="form-control mb-2" placeholder="Images (URLs separated by comma)" required>
                         <button type="submit" class="btn btn-success">Create</button>
                     </form>
